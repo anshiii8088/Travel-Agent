@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Smart Travel Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">AI Smart Travel</p>
+          <h1>Itinerary Planner</h1>
+        </div>
+        <div class="header-actions">
+          <button class="secondary-btn" id="open-memory">Preferences</button>
+          <button class="primary-btn" id="new-plan">New plan</button>
+        </div>
+      </header>
+
+      <nav class="tabbar" aria-label="Main tabs">
+        <button class="tab active" data-target="plan-tab">Plan Trip</button>
+        <button class="tab" data-target="itinerary-tab">Itinerary</button>
+        <button class="tab" data-target="dashboard-tab">Agent Dashboard</button>
+      </nav>
+
+      <main class="layout">
+        <section id="plan-tab" class="panel active">
+          <div class="panel-header">
+            <h2>Trip details</h2>
+            <span class="status-pill">Live planner</span>
+          </div>
+
+          <form id="trip-form" class="trip-form">
+            <div class="field-grid">
+              <label>
+                Origin
+                <input type="text" name="origin" value="Kochi" required />
+              </label>
+              <label>
+                Destination
+                <input type="text" name="destination" value="Munnar" required />
+              </label>
+              <label>
+                Start date
+                <input type="date" name="start_date" value="2026-12-01" required />
+              </label>
+              <label>
+                Days
+                <input type="number" name="days" min="1" max="14" value="3" required />
+              </label>
+              <label>
+                Travellers
+                <input type="number" name="travellers" min="1" max="50" value="2" required />
+              </label>
+              <label>
+                Budget
+                <input type="number" name="budget" min="1000" step="100" value="8000" required />
+              </label>
+              <label>
+                Style
+                <select name="travel_style">
+                  <option value="Balanced" selected>Balanced</option>
+                  <option value="Budget">Budget</option>
+                  <option value="Luxury">Luxury</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Relaxed">Relaxed</option>
+                </select>
+              </label>
+              <label>
+                Interests
+                <input type="text" name="interests" value="Nature,Sightseeing" />
+              </label>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="primary-btn">Generate itinerary</button>
+              <span id="form-status" class="form-status"></span>
+            </div>
+          </form>
+        </section>
+
+        <section id="itinerary-tab" class="panel">
+          <div class="panel-header">
+            <h2>Itinerary overview</h2>
+            <span class="status-pill panel-muted">Ready</span>
+          </div>
+          <div id="itinerary-output" class="itinerary-output empty-state">
+            <p>No itinerary generated yet. Fill in the form to create one.</p>
+          </div>
+        </section>
+
+        <section id="dashboard-tab" class="panel">
+          <div class="panel-header">
+            <h2>Agent activity</h2>
+            <span id="step-status" class="status-pill">Idle</span>
+          </div>
+          <div id="agent-dashboard" class="agent-dashboard empty-state">
+            <p>Activity will appear here as the agent thinks, acts, and looks.</p>
+          </div>
+        </section>
+      </main>
+
+      <aside class="chat-panel" aria-label="Chat assistant">
+        <div class="chat-header">
+          <h3>Travel assistant</h3>
+          <button class="ghost-btn" id="chat-toggle">Hide</button>
+        </div>
+
+        <div id="chat-messages" class="chat-messages">
+          <div class="message bot">
+            <p>Hi! I can help you plan a trip, adjust the budget, or swap activities.</p>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button class="chip" data-message="Reduce budget by 20%">Reduce budget</button>
+          <button class="chip" data-message="Find vegetarian options">Vegetarian</button>
+          <button class="chip" data-message="Swap day 2 for indoor museums">Indoor museums</button>
+        </div>
+
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" type="text" placeholder="Ask about your trip..." />
+          <button type="submit" class="primary-btn">Send</button>
+        </form>
+      </aside>
+    </div>
+
+    <div id="memory-modal" class="modal hidden" aria-modal="true" role="dialog">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Saved preferences</h3>
+          <button class="ghost-btn" id="close-memory">Close</button>
+        </div>
+        <div id="memory-content" class="memory-content"></div>
+      </div>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
